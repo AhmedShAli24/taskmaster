@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>TaskMaster</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='task.css') }}">
+</head>
+<body>
+<div class="container">
+    <h1 class="text-center mt-4 mb-4">Taskmaster</h1>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th>Task</th>
+                <th>Status</th>
+                <th>Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for task in task_list %}
+            <tr>
+                <td>{{ task.task }}</td>
+                <td>{% if task.complete %}Completed
+                  {% else %}
+                  Not Completed
+                  {% endif %}</td>
+                <td> {% if task.date %}
+                  {{ task.date.strftime('%Y-%m-%d') }}
+                {% else %}
+                  No date available
+                {% endif %}</td>
+                <td>
+                    <a href="{{ url_for('delete', task_id=task.id) }}" class="btn btn-danger btn-sm">Delete</a>
+                    <a href="{{ url_for('update', task_id=task.id) }}" class="btn btn-primary btn-sm">Update</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <form action="{{ url_for('add_task') }}" method="post">
+        <div class="form-group">
+            <label for="task">Enter a task</label>
+            <input type="text" name="task" id="task" class="form-control" required>
+        </div>
+        <button type="submit" class="btn btn-success">Add Task</button>
+    </form>
+</div>
+
+</body>
+</html>
