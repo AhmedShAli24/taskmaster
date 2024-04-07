@@ -23,6 +23,6 @@ Taskmaster project is a simple web application that helps users keep track of ta
 
 ## Get Started:
 
-1. Clone the repository.
-2. `pip install -r requirments.txt`
-3. `python app.py`
+    1. Clone the repository.
+    2. `pip install -r requirments.txt`
+    3. `python app.py`
